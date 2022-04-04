@@ -1,0 +1,36 @@
+version: '3.6'
+
+services:
+#    image: debezium/zookeeper:1.1
+#    image: debezium/kafka:1.1
+#    image: confluentinc/cp-zookeeper:latest
+#    image: confluentinc/cp-kafka:latest
+
+  zookeeper:
+    container_name: zookeeper
+#    image: debezium/zookeeper:1.1
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_SYNC_LIMIT: 2
+  
+  kafka:
+    container_name: kafka
+#    image: debezium/kafka:1.1
+    image: confluentinc/cp-kafka:latest
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    links:
+     - zookeeper
+    depends_on:
+      - zookeeper
+    environment:
+    # Váriavel necessária se for usar a imagem do debezium
+    #  ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"

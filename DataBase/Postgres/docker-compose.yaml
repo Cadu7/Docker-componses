@@ -8,6 +8,6 @@ services:
       - "5432:5432"
     restart: "no"
     environment:
-      POSTGRES_DB: "banco"
-      POSTGRES_USER: "postegres"
+      POSTGRES_DB: "DB_Teste"
+      POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "123456789"    

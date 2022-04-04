@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+
+  kafdrop:
+    container_name: Kaf_Drop_Event_Hub
+    image: obsidiandynamics/kafdrop:3.24.0
+    environment:
+      KAFKA_BROKERCONNECT: 
+    ports:
+     - 9000:9000
+    volumes:
+      -  ./kafka.properties:/kafka.properties

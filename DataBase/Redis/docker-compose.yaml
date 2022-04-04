@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    #command: redis-server --requirepass Redis2019!
+    ports:
+      - "6379:6379"
+
+#docker run --name dataBaseRedis -d redis redis-server --save 100 1 --loglevel warning      
